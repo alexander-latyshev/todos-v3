@@ -1,11 +1,14 @@
-import "./App.css";
+import "./index.css";
 
-function App() {
+const App = () => {
   return (
-    <>
+    <div>
       <h1>Hello, World!</h1>
-    </>
+      <h1 className="text-3xl font-bold underline text-red-500">
+        Hello world!
+      </h1>
+    </div>
   );
-}
+};
 
 export default App;
