@@ -1,12 +1,16 @@
+import Header from "./components/header";
+import Main from "./components/main";
 import "./index.css";
+import "./App.css";
 
 const App = () => {
   return (
-    <div>
-      <h1>Hello, World!</h1>
-      <h1 className="text-3xl font-bold underline text-red-500">
-        Hello world!
+    <div className="flex flex-col gap-5 mobile:w-full laptop:w-[600px]">
+      <h1 className="mb-[50px] text-primary mobile:hidden laptop:flex justify-center">
+        Todos
       </h1>
+      <Header />
+      <Main />
     </div>
   );
 };
