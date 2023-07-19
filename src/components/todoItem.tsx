@@ -28,43 +28,47 @@ const TodoItem = (props: ITodo) => {
     transition: "all 0.3s ease-in-out",
   };
 
+  const todo = {
+    id: id,
+    content: content,
+    isEditing: isEditing,
+    isCompleted: isCompleted,
+  };
+
   const editTodoHandler = (event: any) => {
+
     if (event.code === "Enter" && event.target.value) {
       dispatch(
         endEditingTodo({
+          ...todo,
           content: event.target.value,
-          id: props.id,
           isEditing: false,
-          isCompleted: isCompleted,
         })
       );
     }
     if (event.code === "Enter" && !event.target.value) {
-      dispatch(removeTodo(props.id));
+      dispatch(removeTodo(id));
     }
     if (event.code === "Escape") {
-      event.target.value = props.content;
+      event.target.value = content;
       dispatch(
         endEditingTodo({
-          content: props.content,
-          id: props.id,
+          ...todo,
           isEditing: false,
-          isCompleted: isCompleted,
         })
       );
     }
     if (!event.code && event.target.value) {
       dispatch(
         endEditingTodo({
+          ...todo,
           content: event.target.value,
-          id: props.id,
           isEditing: false,
-          isCompleted: isCompleted,
         })
       );
     }
     if (!event.code && !event.target.value) {
-      dispatch(removeTodo(props.id));
+      dispatch(removeTodo(id));
     }
   };
 
@@ -118,7 +122,7 @@ const TodoItem = (props: ITodo) => {
         onClick={() =>
           !isEditing
             ? dispatch(startEditingTodo(id))
-            : dispatch(startEditingTodo(id))
+            : dispatch(endEditingTodo(todo))
         }
       >
         {!isEditing ? (
