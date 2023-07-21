@@ -35,22 +35,20 @@ const TodoItem = (props: ITodo) => {
     isCompleted: isCompleted,
   };
 
-  const editTodoHandler = (event: any) => {
-
-    if (event.code === "Enter" && event.target.value) {
+  const editTodoHandler = (e: any) => {
+    if (e.code === "Enter" && e.target.value) {
       dispatch(
         endEditingTodo({
           ...todo,
-          content: event.target.value,
+          content: e.target.value,
           isEditing: false,
         })
       );
     }
-    if (event.code === "Enter" && !event.target.value) {
+    if (e.code === "Enter" && !e.target.value) {
       dispatch(removeTodo(id));
     }
-    if (event.code === "Escape") {
-      event.target.value = content;
+    if (e.code === "Escape") {
       dispatch(
         endEditingTodo({
           ...todo,
@@ -58,18 +56,16 @@ const TodoItem = (props: ITodo) => {
         })
       );
     }
-    if (!event.code && event.target.value) {
+    if (!e.code && e.target.value) {
       dispatch(
         endEditingTodo({
           ...todo,
-          content: event.target.value,
+          content: e.target.value,
           isEditing: false,
         })
       );
     }
-    if (!event.code && !event.target.value) {
-      dispatch(removeTodo(id));
-    }
+    if (!e.code && !e.target.value) dispatch(removeTodo(id));
   };
 
   useEffect(() => {
